@@ -1,0 +1,99 @@
+#!/bin/bash
+
+bspc   config   border_width                  2
+bspc   config   window_gap                    0
+bspc   config   top_padding                   24
+
+bspc   config   split_ratio                   0.50
+bspc   config   borderless_monocle            true
+bspc   config   gapless_monocle               true
+bspc   config   focus_by_distance             true
+bspc   config   normal_frame_opacity          0.0
+bspc   config   focused_frame_opacity         0.1
+bspc   config   focus_follows_pointer         true
+
+bspc   config   normal_border_color           '#2B2E39'
+bspc   config   focused_border_color          '#5294E2'
+bspc   config   presel_border_color           '#D79921'
+bspc   config   normal_sticky_border_color    '#1D2021'
+bspc   config   focused_sticky_border_color   '#D5C4A1'
+bspc   config   urgent_border_color           '#CC241D'
+
+DESKTOP_1="1"
+DESKTOP_2="2"
+DESKTOP_3="3"
+DESKTOP_4="4"
+DESKTOP_5="5"
+DESKTOP_6="6"
+DESKTOP_7="7"
+DESKTOP_8="8"
+DESKTOP_9="9"
+DESKTOP_0="0"
+
+bspc monitor --reset-desktops \
+    $DESKTOP_1 \
+    $DESKTOP_2 \
+    $DESKTOP_3 \
+    $DESKTOP_4 \
+    $DESKTOP_5 \
+    $DESKTOP_6 \
+    $DESKTOP_7 \
+    $DESKTOP_8 \
+    $DESKTOP_9 \
+    $DESKTOP_0
+
+# Set desktop layouts
+MONOCLE_DESKTOPS="$DESKTOP_2 $DESKTOP_7 $DESKTOP_8 $DESKTOP_9"
+for desktop in $MONOCLE_DESKTOPS; do
+    bspc desktop $desktop --layout monocle
+done
+
+# Clear all rules
+for rule in $(bspc rule --list | awk '{ print $1 }'); do
+    bspc rule --remove $rule
+done
+
+# Make all `new/unknown` windows floating
+
+bspc rule --add "URxvt"                                 desktop="$DESKTOP_1"   state=tiled        follow=on
+bspc rule --add "chromium"                              desktop="$DESKTOP_2"   state=tiled        follow=on
+bspc rule --add "Gvim:gvim"                             desktop="$DESKTOP_3"   state=tiled        follow=on
+bspc rule --add "xpad:xpad"                             desktop="$DESKTOP_5"   state=floating     follow=on   border=off
+bspc rule --add "Wine:ManiaPlanet.exe"                  desktop="$DESKTOP_6"   state=fullscreen   follow=on
+bspc rule --add "URxvt:URxvtToxic"                      desktop="$DESKTOP_7"   state=tiled        follow=on
+bspc rule --add "telegram-desktop:telegram-desktop"     desktop="$DESKTOP_8"   state=tiled        follow=on
+bspc rule --add "Slack"                                 desktop="$DESKTOP_9"   state=tiled        follow=on
+bspc rule --add "Skype"                                 desktop="$DESKTOP_0"   state=tiled        follow=on   split_ratio=0.25   split_dir=east
+
+# bspc rule --add "*:libreoffice"       state=tiled
+bspc rule --add "URxvt:URxvtQuake"                           state=floating sticky=on
+bspc rule --add "URxvt:URxvtFZF"        desktop=focused      state=floating
+bspc rule --add "TeamViewer:TeamViewer" desktop="$DESKTOP_4" state=floating follow=on
+
+# bspc rule --add "*"                                     desktop="$DESKTOP_4"   state=floating     follow=on
+
+# Launch xPad
+if [ -z "$(wmctrl -lx | grep xpad.xpad | awk '{ print $1 }')" ]; then
+    nohup xpad --no-new --hide &>/dev/null & disown
+fi
+
+# Launch Toxic
+if [ -z "$(wmctrl -lx | grep URxvtToxic.URxvt | awk '{ print $1 }')" ]; then
+    nohup run-toxic &>/dev/null & disown
+fi
+
+# Launch Telegram
+if [ -z "$(wmctrl -lx | grep telegram-desktop.telegram-desktop | awk '{ print $1 }')" ]; then
+    nohup telegram-desktop &>/dev/null & disown
+fi
+
+# Launch Slack
+if [ -z "$(wmctrl -lx | grep slack.Slack | awk '{ print $1 }')" ]; then
+    nohup slack &>/dev/null & disown
+fi
+
+# Launch Skype
+if [ -z "$(wmctrl -lx | grep skype.Skype | awk '{ print $1 }')" ]; then
+    nohup apulse32 skype &>/dev/null & disown
+fi
+

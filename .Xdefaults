@@ -1,0 +1,11 @@
+URxvt.depth:          32
+URxvt.buffered:       true
+URxvt.transparent:    false
+URxvt.background:     rgba:0000/0000/0000/a000
+URxvt.foreground:     rgba:ffff/ffff/ffff/ffff
+URxvt.font:           xft:Source\ Code\ Pro\ for\ Powerline:size=11
+URxvt.scrollBar:      false
+URxvt.internalBorder: 0
+URxvt.externalBorder: 1
+URxvt.cursorBlink:    true
+
