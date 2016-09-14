@@ -33,9 +33,18 @@ stalonetray &
 
 # start applications
 redshift -c ~/.config/redshift/redshift.conf &
+megasync &
 
 # start scripts
 ./.fehbg &
+
+# secure startup scripts
+if [[ -d ~/sbin/ ]]; then
+    for f in $(find ~/sbin/ -type f -executable)
+    do
+        $f &
+    done
+fi
 
 exec bspwm
 
