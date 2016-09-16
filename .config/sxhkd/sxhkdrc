@@ -160,3 +160,7 @@ super + @button{1-3}
 XF86Audio{RaiseVolume,LowerVolume,Mute}
 	amixer -q sset Master {+1 unmute,-1 unmute, toggle}
 
+# brigtness controls
+XF86MonBrightness{Up,Down}
+	light {-A,-U} -p 1
+
