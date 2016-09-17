@@ -40,7 +40,7 @@ megasync &
 
 # secure startup scripts
 if [[ -d ~/sbin/ ]]; then
-    for f in $(find ~/sbin/ -type f -executable)
+    for f in $(find ~/sbin/ -follow -type f -executable)
     do
         $f &
     done
