@@ -69,6 +69,7 @@ bspc rule --add "Skype"                                 desktop="$DESKTOP_0"   s
 bspc rule --add "URxvt:URxvtQuake"                           state=floating sticky=on
 bspc rule --add "URxvt:URxvtFZF"        desktop=focused      state=floating
 bspc rule --add "TeamViewer:TeamViewer" desktop="$DESKTOP_4" state=floating follow=on
+bspc rule --add "R_x11:r_x11"           desktop=focused      state=floating
 
 # bspc rule --add "*"                                     desktop="$DESKTOP_4"   state=floating     follow=on
 
