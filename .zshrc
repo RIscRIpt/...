@@ -61,6 +61,18 @@ antigen bundles <<EOBUNDLES
     vi-mode
 EOBUNDLES
 
+# Bullet train theme settings
+## Bullet train :: Time
+BULLETTRAIN_TIME_SHOW=false
+BULLETTRAIN_CONTEXT_SHOW=true
+## Bullet train :: Context
+BULLETTRAIN_CONTEXT_DEFAULT_USER='richard'
+BULLETTRAIN_IS_SSH_CLIENT=true
+## Bullet train :: Go
+BULLETTRAIN_GO_SHOW=true
+## Bullet train :: Command execution time
+BULLETTRAIN_EXEC_TIME_SHOW=true
+
 antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
 antigen apply
