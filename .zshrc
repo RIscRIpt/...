@@ -87,3 +87,6 @@ fi
 # Load FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Setup vim as manpager
+export MANPAGER='zsh -c "vim -MRn -c \"set ft=man\" </dev/tty <(col -b)"'
+
