@@ -1,0 +1,90 @@
+#!/bin/zsh
+
+# source configs
+. ./config
+. ./colors
+
+# check if panel is already running
+if [[ $(pgrep -cx panel) -gt 1 ]]; then
+    echo "The panel is already running!" >&2
+    exit 1
+fi
+
+# exit gracefully
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+# remove old panel fifo, and create a new one
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# update bspwm config, to not overlap the panel
+bspc config top_padding $PANEL_HEIGHT
+
+# subscribe to bspwm status feed
+bspc control --subscribe > "$PANEL_FIFO" &
+
+# subscribe to xtitle (window title)
+xtitle -sf 'TITLE%s' > "$PANEL_FIFO" &
+
+# date / time
+while true; do
+    echo -e "DATETIME$(date +"$ICON_CLOCK%T $ICON_DATE%d-%b-%y")"
+    sleep $REFRESH_DATETIME
+done > "$PANEL_FIFO" &
+
+# battery
+if [[ $(ls $BATTERY | wc -w) -gt 0 ]]; then
+    while true; do
+        BATTERY_LEVEL=$(acpi -b | grep -o '[[:digit:]]\+%' | sed 's/%//')
+        if [[ $(cat "$POWERSUPPLY/online") != 1 ]]; then
+            if [[ $BATTERY_LEVEL -ge 80 ]]; then
+                BATTERY_ICON=$ICON_BATTERY_FULL
+            elif [[ $BATTERY_LEVEL -ge 60 && $BATTERY_LEVEL -lt 80 ]]; then
+                BATTERY_ICON=$ICON_BATTERY_THREEQUARTERS
+            elif [[ $BATTERY_LEVEL -ge 40 && $BATTERY_LEVEL -lt 60 ]]; then
+                BATTERY_ICON=$ICON_BATTERY_HALF
+            elif [[ $BATTERY_LEVEL -ge 20 && $BATTERY_LEVEL -lt 40 ]]; then
+                BATTERY_ICON=$ICON_BATTERY_QUARTER
+            else
+                BATTERY_ICON=$ICON_BATTERY_EMPTY
+            fi
+        else
+            BATTERY_ICON=$ICON_BATTERY_CHARGING
+        fi
+        echo -e "BATTERY$BATTERY_ICON$BATTERY_LEVEL"
+    done > "$PANEL_FIFO" &
+fi
+
+# wifi
+if [[ $(ls /sys/class/net/$WIFI_INTERFACE | wc -w) -gt 0 ]]; then
+    while true; do
+        WIFI_SIGNAL=$(iw "$WIFI_INTERFACE" link | grep 'signal' | sed 's/signal: //' | sed 's/ dBm//' | sed 's/\t//')
+        if [[ $(iw "$WIFI_INTERFACE" link) != "Not connected." ]]; then
+            if [[ $WIFI_SIGNAL -ge -67 ]]; then
+                WIFI_COLOR=$COLOR_SIGNAL_HIGH
+            elif [[ $WIFI_SIGNAL -ge -70 && $WIFI_SIGNAL -lt -67 ]]; then
+                WIFI_COLOR=$COLOR_SIGNAL_MEDIUM
+            elif [[ $WIFI_SIGNAL -ge -80 && $WIFI_SIGNAL -lt -70 ]]; then
+                WIFI_COLOR=$COLOR_SIGNAL_LOW
+            fi
+            echo -e "WIFI%{F$WIFI_COLOR}$ICON_WIFI_CONNECTED%{F-}"
+        else
+            WIFI_COLOR=$COLOR_SIGNAL_NONE
+            echo -e "LINK%{F$WIFI_COLOR}$ICON_WIFI_DISCONNECTED%{F-}"
+        fi
+        sleep $REFRESH_WIFI
+    done > "$PANEL_FIFO" &
+fi
+
+
+./panel_bar < "$PANEL_FIFO" | lemonbar \
+    -g "x$PANEL_HEIGHT" \
+    -f "$PANEL_FONT" \
+    -f "$ICON_FONT" \
+    -F "$COLOR_FOREGROUND" \
+    -B "$COLOR_BACKGROUND" \
+    -u 2 \
+    | zsh &
+
+wait
+
