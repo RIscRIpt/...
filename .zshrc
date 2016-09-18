@@ -1,8 +1,28 @@
+# History settings
 HISTFILE=~/.history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory notify
+HISTSIZE=2147483647
+SAVEHIST=2147483647
+
+# ZSH options
+setopt \
+    appendhistory \
+    extendedglob \
+    notify
+
+# ZSH key bindings style
 bindkey -v
+
+# ZSH better up/down arrow search
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\e[A' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
+bindkey '\e[B' down-line-or-beginning-search
+
+# ZSH compinstall
 zstyle :compinstall filename '/home/richard/.zshrc'
 autoload -Uz compinit
 compinit
