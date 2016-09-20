@@ -1,0 +1,45 @@
+conky.config = {
+    alignment = 'bottom_left',
+    background = true,
+    border_width = 1,
+    cpu_avg_samples = 2,
+    color0 = 'ffffff',
+    color1 = '5294e2',
+    color2 = '2b2e39',
+    default_color = 'white',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    double_buffer = true,
+    use_xft = true,
+    font = 'Source Sans Pro:size=12',
+    gap_x = 32,
+    gap_y = 32,
+    minimum_height = 128,
+    minimum_width = 5,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    pad_percents = 3.0,
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'left',
+    show_graph_scale = false,
+    show_graph_range = false
+}
+
+conky.text = [[
+${font Source Sans Pro:pixelsize=120}${color0}${time %H:%M}${font}${voffset -75}${offset 16}${font Source Sans Pro:pixelsize=42}${color1}${time %d}${font}${voffset -18}${offset 8}${font Source Sans Pro:pixelsize=22}${color2}${time %B} ${time %Y}${font}${voffset 20}${offset -200}${font Source Sans Pro:pixelsize=58}${time %A}${font}
+]]
+

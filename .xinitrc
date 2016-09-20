@@ -34,9 +34,12 @@ stalonetray &
 # start applications
 redshift -c ~/.config/redshift/redshift.conf &
 megasync &
+conky -c ~/.config/conky/main_tree_left.lua &
+conky -c ~/.config/conky/main_tree_right.lua &
+conky -c ~/.config/conky/clock.lua &
 
-# start scripts
-./.fehbg &
+# set background
+~/.fehbg &
 
 # secure startup scripts
 if [[ -d ~/sbin/ ]]; then

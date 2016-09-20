@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --bg-fill '/home/richard/cloud/Pictures/o_fut_abs_wp.jpg' 
