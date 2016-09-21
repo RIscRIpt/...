@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # source configs
-. ./config
-. ./colors
+. ~/.config/lemonbar/config
+. ~/.config/lemonbar/colors
 
 # check if panel is already running
 if [[ $(pgrep -cx panel) -gt 1 ]]; then
@@ -21,19 +21,19 @@ mkfifo "$PANEL_FIFO"
 bspc config top_padding $PANEL_HEIGHT
 
 # subscribe to bspwm status feed
-bspc control --subscribe > "$PANEL_FIFO" &
+bspc subscribe > "$PANEL_FIFO" &
 
 # subscribe to xtitle (window title)
-xtitle -sf 'TITLE%s' > "$PANEL_FIFO" &
+# xtitle -sf 'TITLE%s' > "$PANEL_FIFO" &
 
 # date / time
 while true; do
-    echo -e "DATETIME$(date +"$ICON_CLOCK%T $ICON_DATE%d-%b-%y")"
+    echo -e "DATETIME$(date +"$ICON_CLOCK %T    $ICON_DATE %d-%b-%y")"
     sleep $REFRESH_DATETIME
 done > "$PANEL_FIFO" &
 
 # battery
-if [[ $(ls $BATTERY | wc -w) -gt 0 ]]; then
+if [[ $(ls $POWERSUPPLY_PATH | wc -w) -gt 0 ]]; then
     while true; do
         BATTERY_LEVEL=$(acpi -b | grep -o '[[:digit:]]\+%' | sed 's/%//')
         if [[ $(cat "$POWERSUPPLY/online") != 1 ]]; then
@@ -56,7 +56,7 @@ if [[ $(ls $BATTERY | wc -w) -gt 0 ]]; then
 fi
 
 # wifi
-if [[ $(ls /sys/class/net/$WIFI_INTERFACE | wc -w) -gt 0 ]]; then
+if [[ $(tail -n+3 /proc/net/wireless | grep -q .) ]]; then
     while true; do
         WIFI_SIGNAL=$(iw "$WIFI_INTERFACE" link | grep 'signal' | sed 's/signal: //' | sed 's/ dBm//' | sed 's/\t//')
         if [[ $(iw "$WIFI_INTERFACE" link) != "Not connected." ]]; then
@@ -78,9 +78,9 @@ fi
 
 
 ./panel_bar < "$PANEL_FIFO" | lemonbar \
-    -g "x$PANEL_HEIGHT" \
-    -f "$PANEL_FONT" \
-    -f "$ICON_FONT" \
+    -g "1776x$PANEL_HEIGHT" \
+    -o +0 -f "$PANEL_FONT" \
+    -o -2 -f "$ICON_FONT" \
     -F "$COLOR_FOREGROUND" \
     -B "$COLOR_BACKGROUND" \
     -u 2 \

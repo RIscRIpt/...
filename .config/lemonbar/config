@@ -2,9 +2,10 @@
 PANEL_FIFO=/tmp/panel-fifo
 
 # Hardware
+POWERSUPPLY_PATH="/sys/class/power_supply"
+POWERSUPPLY="$POWERSUPPLY_PATH/AC0"
+BATTERY="$POWERSUPPLY_PATH/BAT0"
 WIFI_INTERFACE="mlan0"
-POWERSUPPLY="/sys/class/power_supply/AC0"
-BATTERY="/sys/class/power_supply/BAT0"
 
 # Refresh times in seconds
 REFRESH_DATETIME=1
@@ -17,8 +18,8 @@ REFRESH_WIFI=10
 PANEL_HEIGHT=24
 
 # Fonts
-PANEL_FONT="Source Sans Pro Semibold:size=12"
-ICON_FONT="FontAwesome:size=13"
+PANEL_FONT="Source Sans Pro Semibold:size=13"
+ICON_FONT="FontAwesome:size=14"
 
 # Icons
 ICON_CLOCK='\uf017'
