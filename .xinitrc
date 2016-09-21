@@ -37,6 +37,7 @@ megasync &
 conky -c ~/.config/conky/main_tree_left.lua &
 conky -c ~/.config/conky/main_tree_right.lua &
 conky -c ~/.config/conky/clock.lua &
+~/.config/lemonbar/panel &
 
 # set background
 ~/.fehbg &
