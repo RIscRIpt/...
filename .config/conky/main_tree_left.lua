@@ -57,7 +57,7 @@ ${color2}│   └─╶${color0} timeleft ${color1}[${color0} ${battery_time} $
 ${color2}│${endif}
 ${color2}└─╶${color0} network ${if_up enp3s0}
 ${color2}    ├─╶${color0} ip ${color1}[${color0} ${addr enp3s0} ${color1}]${color0}
-${color2}    └─╶${color0} speed
+${color2}    └─╶${color0} usage
 ${color2}        ├─╶${color0} download ${color1}[${color0} ${downspeed enp3s0} ${color1}]${color0}
 ${color2}        ├─╶ ${downspeedgraph enp3s0 18, 248 5294e2 5294e2}${color0}
 ${color2}        │
@@ -65,7 +65,7 @@ ${color2}        ├─╶${color0} upload   ${color1}[${color0} ${upspeed enp3s
 ${color2}        └─╶ ${upspeedgraph enp3s0 18, 248 5294e2 5294e2}${color0}
 ${else} ${if_up mlan0}
 ${color2}    ├─╶${color0} ip ${color1}[${color0} ${addr mlan0} ${color1}]${color0}
-${color2}    ├─╶${color0} speed
+${color2}    ├─╶${color0} usage
 ${color2}    │   ├─╶${color0} download ${color1}[${color0} ${downspeed mlan0} ${color1}]${color0}
 ${color2}    │   ├─╶ ${downspeedgraph mlan0 18, 248 5294e2 5294e2}${color0}
 ${color2}    │   │

@@ -70,13 +70,14 @@ ${alignr}${color1}[${color0} $swap / $swapmax ${color1}]${color0} ${color2}╴�
 ${alignr}${color2}│${color0}
 ${alignr}disk ${color2}╴─┘${color0}
 ${alignr}partitions ${color2}╴─┤    ${color0}
-${alignr}/ ${color2}╴─┤    │    ${color0}
-${alignr}${color1}[${color0} ${fs_used /} / ${fs_size /} ${color1}]${color0} ${color2}╴─┘   │    │    ${color0}
-${alignr}/mnt/windows ${color2}╴─┘    │    ${color0}
-${alignr}${color1}[${color0} ${fs_used /mnt/windows} / ${fs_size /mnt/windows} ${color1}]${color0} ${color2}╴─┘        │    ${color0}
-${alignr}read ${color2}╴─┤    ${color0}
-${alignr}${color2}${diskiograph_read 18, 248 5294e2 5294e2}${color0} ${color2}╴─┘   │    ${color0}
-${alignr}write ${color2}╴─┘    ${color0}
-${alignr}${color2}${diskiograph_write 18, 248 5294e2 5294e2}${color0} ${color2}╴─┘        ${color0}
+${alignr}/ ${color2}╴─┤   │    ${color0}
+${alignr}${color1}[${color0} ${fs_used /} / ${fs_size /} ${color1}]${color0} ${color2}╴─┘   │   │    ${color0}
+${alignr}/mnt/windows ${color2}╴─┘   │    ${color0}
+${alignr}${color1}[${color0} ${fs_used /mnt/windows} / ${fs_size /mnt/windows} ${color1}]${color0} ${color2}╴─┘       │    ${color0}
+${alignr}usage ${color2}╴─┘    ${color0}
+${alignr}${color1}[${color0} ${diskio_read} ${color1}]${color0}  read ${color2}╴─┤        ${color0}
+${alignr}${color2}${diskiograph_read 18, 248 5294e2 5294e2}${color0} ${color2}╴─┘   │        ${color0}
+${alignr}${color1}[${color0} ${diskio_write} ${color1}]${color0} write ${color2}╴─┘        ${color0}
+${alignr}${color2}${diskiograph_write 18, 248 5294e2 5294e2}${color0} ${color2}╴─┘            ${color0}
 ]]
 
