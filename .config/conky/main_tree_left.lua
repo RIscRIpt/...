@@ -49,12 +49,12 @@ ${color2}│   ├─╶${color0} host    ${color1}[${color0} ${nodename} ${colo
 ${color2}│   ├─╶${color0} terms   ${color1}[${color0} ${user_terms} ${color1}]${color0}
 ${color2}│   ├─╶${color0} uptime  ${color1}[${color0} ${uptime} ${color1}]${color0}
 ${color2}│   └─╶${color0} entropy ${color1}[${color0}${entropy_perc}% ${color1}]${color0} ${color1}[${color0} ${entropy_avail}/${entropy_poolsize} ${color1}]${color0}
-${color2}│
+${color2}│${if_up mlan0}
 ${color2}├─╶${color0} battery
 ${color2}│   ├─╶${color0} status ${color1}[${color0} ${battery} ${color1}]${color0}
 ${color2}│   │   └─╶ ${battery_bar 18, 248}${color0}
 ${color2}│   └─╶${color0} timeleft ${color1}[${color0} ${battery_time} ${color1}]${color0}
-${color2}│
+${color2}│${endif}
 ${color2}└─╶${color0} network ${if_up enp3s0}
 ${color2}    ├─╶${color0} ip ${color1}[${color0} ${addr enp3s0} ${color1}]${color0}
 ${color2}    └─╶${color0} speed
