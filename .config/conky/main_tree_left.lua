@@ -50,6 +50,11 @@ ${color2}│   ├─╶${color0} terms   ${color1}[${color0} ${user_terms} ${co
 ${color2}│   ├─╶${color0} uptime  ${color1}[${color0} ${uptime} ${color1}]${color0}
 ${color2}│   └─╶${color0} entropy ${color1}[${color0}${entropy_perc}% ${color1}]${color0} ${color1}[${color0} ${entropy_avail}/${entropy_poolsize} ${color1}]${color0}
 ${color2}│
+${color2}├─╶${color0} battery
+${color2}│   ├─╶${color0} status ${color1}[${color0} ${battery} ${color1}]${color0}
+${color2}│   │   └─╶ ${battery_bar 18, 248}${color0}
+${color2}│   └─╶${color0} timeleft ${color1}[${color0} ${battery_time} ${color1}]${color0}
+${color2}│
 ${color2}└─╶${color0} network ${if_up enp3s0}
 ${color2}    ├─╶${color0} ip ${color1}[${color0} ${addr enp3s0} ${color1}]${color0}
 ${color2}    └─╶${color0} speed
@@ -62,10 +67,10 @@ ${else} ${if_up mlan0}
 ${color2}    ├─╶${color0} ip ${color1}[${color0} ${addr mlan0} ${color1}]${color0}
 ${color2}    ├─╶${color0} speed
 ${color2}    │   ├─╶${color0} download ${color1}[${color0} ${downspeed mlan0} ${color1}]${color0}
-${color2}    │   ├─╶ ${downspeedgraph enp3s0 18, 248 5294e2 5294e2}${color0}
+${color2}    │   ├─╶ ${downspeedgraph mlan0 18, 248 5294e2 5294e2}${color0}
 ${color2}    │   │
 ${color2}    │   ├─╶${color0} upload   ${color1}[${color0} ${upspeed mlan0} ${color1}]${color0}
-${color2}    │   └─╶ ${upspeedgraph enp3s0 18, 248 5294e2 5294e2}${color0}
+${color2}    │   └─╶ ${upspeedgraph mlan0 18, 248 5294e2 5294e2}${color0}
 ${color2}    └─╶${color0} wireless
 ${color2}        ├─╶${color0} essid   ${color1}[${color0} ${wireless_essid mlan0} ${color1}]${color0}
 ${color2}        ├─╶${color0} bitrate ${color1}[${color0} ${wireless_bitrate mlan0} ${color1}]${color0}
