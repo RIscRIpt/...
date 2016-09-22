@@ -51,7 +51,8 @@ if [[ $(ls $POWERSUPPLY_PATH | wc -w) -gt 0 ]]; then
         else
             BATTERY_ICON=$ICON_BATTERY_CHARGING
         fi
-        echo -e "BATTERY$BATTERY_ICON$BATTERY_LEVEL"
+        echo -e "BATTERY$BATTERY_ICON $BATTERY_LEVEL"
+        sleep $REFRESH_BATTERY
     done > "$PANEL_FIFO" &
 fi
 
@@ -77,7 +78,7 @@ if [[ $(tail -n+3 /proc/net/wireless | grep -q .) ]]; then
 fi
 
 
-./panel_bar < "$PANEL_FIFO" | lemonbar \
+~/.config/lemonbar/panel_bar < "$PANEL_FIFO" | lemonbar \
     -g "1776x$PANEL_HEIGHT" \
     -o +0 -f "$PANEL_FONT" \
     -o -2 -f "$ICON_FONT" \
