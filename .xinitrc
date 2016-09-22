@@ -25,6 +25,9 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+# fix X
+xsetroot -cursor_name left_ptr
+
 # start daemons
 sxhkd &
 urxvtd -q -f -o
@@ -36,7 +39,6 @@ redshift -c ~/.config/redshift/redshift.conf &
 megasync &
 conky -c ~/.config/conky/main_tree_left.lua &
 conky -c ~/.config/conky/main_tree_right.lua &
-conky -c ~/.config/conky/clock.lua &
 ~/.config/lemonbar/panel &
 
 # set background

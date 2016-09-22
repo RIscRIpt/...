@@ -78,5 +78,20 @@ ${color2}        ├─╶${color0} mode    ${color1}[${color0} ${wireless_mode 
 ${color2}        ├─╶${color0} quality ${color1}[${color0} ${wireless_link_qual}  ( ${wireless_link_qual_perc mlan0}% ) ${color1}]${color0}
 ${color2}        └─╶ ${wireless_link_bar 18, 248 mlan0}${color0}
 ${endif}
+${voffset 374}
+${color2}┌─╶ tti_schedule
+${color2}│   │     time       class                           name
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${color2}│
+${voffset -222}${color2}${font Source Code Pro}${execi 1800 tti_schedule_conky}
+${voffset 8}${offset 32}${font Source Sans Pro:pixelsize=120}${color0}${time %H:%M}${font}${voffset -75}${offset 16}${font Source Sans Pro:pixelsize=42}${color1}${time %d}${font}${voffset -18}${offset 8}${font Source Sans Pro:pixelsize=22}${color2}${time %B} ${time %Y}${font}${voffset 20}${offset -200}${font Source Sans Pro:pixelsize=58}${time %A}${font}
 ]]
 
