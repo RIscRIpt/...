@@ -1,0 +1,57 @@
+#define S_base03        rgba:0000/2b00/3600/d000
+#define S_base02        rgba:0700/3600/4200/d000
+#define S_base01        rgba:5800/6e00/7500/d000
+#define S_base00        rgba:6500/7b00/8300/d000
+#define S_base0         rgba:8300/9400/9600/d000
+#define S_base1         rgba:9300/a100/a100/d000
+#define S_base2         rgba:ee00/e800/d500/d000
+#define S_base3         rgba:fd00/f600/e300/d000
+
+*background:            S_base03
+*foreground:            rgba:8300/9400/9600/ffff
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+#define S_yellow        rgba:b500/8900/0000/d000
+#define S_orange        rgba:cb00/4b00/1600/d000
+#define S_red           rgba:dc00/3200/2f00/d000
+#define S_magenta       rgba:d300/3600/8200/d000
+#define S_violet        rgba:6c00/7100/c400/d000
+#define S_blue          rgba:2600/8b00/d200/d000
+#define S_cyan          rgba:2a00/a100/9800/d000
+#define S_green         rgba:8500/9900/0000/d000
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+
+!! red dark/light
+*color1:                S_red
+*color9:                S_orange
+
+!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+
+!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+
+!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+
+!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+
+!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+
+!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
+
