@@ -1,3 +1,6 @@
+# Disable compression of packages
+export PKGEXT='.pkg.tar'
+
 # Setup PATHs
 export CLOUD=~/cloud
 
